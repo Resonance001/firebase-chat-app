@@ -1,4 +1,11 @@
-import { Pressable, StyleSheet, Text, TextStyle, View } from 'react-native';
+import {
+    Pressable,
+    StyleSheet,
+    Text,
+    TextStyle,
+    View,
+    ViewStyle,
+} from 'react-native';
 import React from 'react';
 import { COLORS } from '@/constants/Colors';
 
@@ -10,6 +17,7 @@ interface StyledButtonProps extends TextStyle {
     loading?: boolean;
     onPress: () => void;
     children: React.ReactNode;
+    style?: ViewStyle;
 }
 
 const StyledButton = ({
@@ -18,14 +26,15 @@ const StyledButton = ({
     onPress,
     loading = false,
     children,
+    style,
     ...props
 }: StyledButtonProps) => {
-    const style = styles({ variant, color });
+    const buttonStyle = styles({ variant, color });
 
     return (
-        <View style={style.container}>
+        <View style={[buttonStyle.container, style]}>
             <Pressable onPress={onPress} disabled={loading}>
-                <Text style={style.textStyle} {...props}>
+                <Text style={buttonStyle.textStyle} {...props}>
                     {children}
                 </Text>
             </Pressable>
